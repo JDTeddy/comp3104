@@ -32,6 +32,10 @@ jobs:
           node-version: '22' # Specify your required version (e.g., '18', '20', '22')
           cache: 'npm'
 
+      # 3. Clean install dependencies
+      - name: Install dependencies
+        run: npm install
+
       # 4. Run tests
       - name: Run Tests
         run: npm test  
