@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/JDTeddy/comp3104/issues"
   },
-  "homepage": "https://github.com/JDTeddy/comp3104",
+  "homepage": "https://JDTeddy.github.io/comp3104",
   "dependencies": {
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
@@ -33,7 +33,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-  "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0"
   },
   "eslintConfig": {
     "extends": [
