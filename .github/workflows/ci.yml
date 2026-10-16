@@ -1,46 +1,47 @@
 name: Deploy React App COMP3104 DevOps Project CI
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on pull request events but only for the "main" branch
   pull_request:
-    branches: ["main"] # Adjust this to your main branch name if necessary
+    branches: [ "main" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v5
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
 
-      # Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      # Step 2: Set up the Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "22.x" # Use the appropriate Node.js version for your project
+          node-version: '22' # Specify your required Node version
+          cache: 'npm'       # Automatically caches npm dependencies
 
-      # Cache Node.js modules
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: node_modules # Take any latest cache if failed to find it for current package-lock.json  
-          
-      # Install dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-
-      # Build React app
+      
+      # Step 4:Build React app
       - name: Build the app
         run: npm run build
 
-      # Run tests
-      - name: Run test
-        run: npm run test
+      # Step 5: Run tests
+      - name: Run tests
+        run: npm test
 
-      # Deploy to GitHub Pages
+      # Step 6:Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
